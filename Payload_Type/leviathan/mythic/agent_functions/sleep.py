@@ -23,17 +23,12 @@ class SleepCommand(CommandBase):
     help_cmd = 'sleep {"sleep":10}'
     description = "Change the sleep interval for an agent"
     version = 1
-    is_exit = False
-    is_file_browse = False
-    is_process_list = False
-    is_download_file = False
-    is_remove_file = False
-    is_upload_file = False
     author = "@xorrior"
     argument_class = SleepArguments
     attackmapping = []
 
     async def create_tasking(self, task: MythicTask) -> MythicTask:
+        task.display_params = str(task.args.get_arg("sleep")) + "s"
         return task
 
     async def process_response(self, response: AgentResponse):

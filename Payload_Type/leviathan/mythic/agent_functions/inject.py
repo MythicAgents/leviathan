@@ -25,12 +25,6 @@ class InjectCommand(CommandBase):
     help_cmd = 'inject {"tabid":0,"javascript":"base64 encoded javascript"}'
     description = "Inject arbitrary javascript into a browser tab"
     version = 1
-    is_exit = False
-    is_file_browse = False
-    is_process_list = False
-    is_download_file = False
-    is_remove_file = False
-    is_upload_file = False
     author = "@xorrior"
     argument_class = InjectArguments
     attackmapping = []

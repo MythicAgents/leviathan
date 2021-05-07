@@ -17,12 +17,6 @@ class TabsCommand(CommandBase):
     help_cmd = "tabs"
     description = "Retrieve information about all open tabs in the current window"
     version = 1
-    is_exit = False
-    is_file_browse = False
-    is_process_list = False
-    is_download_file = False
-    is_remove_file = False
-    is_upload_file = False
     author = "@xorrior"
     argument_class = TabsArguments
     attackmapping = []

@@ -15,9 +15,10 @@ class Leviathan(PayloadType):
     author = "@xorrior"
     supported_os = [SupportedOS.Chrome]
     wrapper = False
+    mythic_encrypts = True
     wrapped_payloads = []
     note = "This payload uses javascript, html, and CSS for execution in the context of a browser via a Chrome Browser extension"
-    supports_dynamic_loading = True
+    supports_dynamic_loading = False
     build_parameters = {
         "name": BuildParameter(
             name="name",
@@ -51,7 +52,6 @@ class Leviathan(PayloadType):
         # this function gets called to create an instance of your payload
         resp = BuildResponse(status=BuildStatus.Error)
         # create the payload
-        stdout_err = ""
         try:
             agent_build_path = tempfile.TemporaryDirectory(suffix=self.uuid)
             # shutil to copy payload files over
@@ -108,11 +108,10 @@ class Leviathan(PayloadType):
                 cwd=agent_build_path.name,
             )
             stdout, stderr = await proc.communicate()
-            stdout_err = ""
             if stdout:
-                stdout_err += f"[stdout]\n{stdout.decode()}\n"
+                stdout += f"[stdout]\n{stdout.decode()}\n"
             if stderr:
-                stdout_err += f"[stderr]\n{stderr.decode()}"
+                stderr += f"[stderr]\n{stderr.decode()}"
             if os.path.exists("{}/extension.crx".format(agent_build_path.name)):
                 temp_uuid = str(uuid.uuid4())
                 shutil.make_archive(
@@ -124,12 +123,13 @@ class Leviathan(PayloadType):
                     "{}/{}.zip".format(agent_build_path.name, temp_uuid), "rb"
                 ).read()
                 resp.status = BuildStatus.Success
-                resp.message = "created zip of chrome extension files"
+                resp.build_message = "created zip of chrome extension files"
             else:
                 # something went wrong, return our errors
                 resp.set_status(BuildStatus.Error)
-                resp.set_message(stdout_err)
+                resp.build_stdout = str(stdout)
+                resp.build_stderr = str(stderr)
         except Exception as e:
             resp.set_status(BuildStatus.Error)
-            resp.message = "Error building payload: " + str(e) + "\n" + stdout_err
+            resp.build_stderr = "Error building payload: " + str(e) + "\n" + stdout_err
         return resp
