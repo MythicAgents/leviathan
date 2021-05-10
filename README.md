@@ -1,8 +1,13 @@
 # Leviathan
 
-leviathan is a Chrome Extension payload that's designed to live in the browser and be hosted on your own infrastructure (not within Google Chrome's store). This leviathan instance supports Mythic 2.2 and will updated as necessary. It does not support Mythic 2.1 and lower.
+Leviathan is a Chrome extension written in JavaScript by @xorrior. It's intended to be leveraged outside of the Google Chrome store and hosted on your own servers.
 
-The agent has `mythic_payloadtype_container==0.0.42` PyPi package installed and reports to Mythic as version "6".
+Leviathan uses the `itsafeaturemythic/leviathan_payload:0.0.4` docker container and reports to Mythic as version "6".
+
+## Leviathan's Icon
+
+leviathan's icon was made by Freepik from www.flaticon.com
+
 
 ## How to install an agent in this format within Mythic
 
@@ -16,4 +21,6 @@ Now, you might be wondering _when_ should you or a user do this to properly add 
 * Mythic is already up and going, then you can run the install script and just direct that agent's containers to start (i.e. `sudo ./start_payload_types.sh agentName` and if that agent has its own special C2 containers, you'll need to start them too via `sudo ./start_c2_profiles.sh c2profileName`).
 * Mythic is already up and going, but you want to minimize your steps, you can just install the agent and run `sudo ./start_mythic.sh`. That script will first _stop_ all of your containers, then start everything back up again. This will also bring in the new agent you just installed.
 * Mythic isn't running, you can install the script and just run `sudo ./start_mythic.sh`. 
+
+
 
