@@ -1,8 +1,8 @@
 # Leviathan
 
-Leviathan is a Chrome extension written in JavaScript by @xorrior. It's intended to be leveraged outside of the Google Chrome store and hosted on your own servers.
+Leviathan is a Chrome extension written in JavaScript by @xorrior. It's intended to be leveraged outside of the Google Chrome store and hosted on your own servers. This is for Mythic 2.2.7, and does not support Mythic 2.1.
 
-Leviathan uses the `itsafeaturemythic/leviathan_payload:0.0.5` docker container and reports to Mythic as version "7".
+Leviathan uses the `itsafeaturemythic/leviathan_payload:0.0.6` docker container and reports to Mythic as version "8".
 
 ## Leviathan's Icon
 
