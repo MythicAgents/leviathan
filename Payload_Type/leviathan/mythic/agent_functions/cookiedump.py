@@ -3,9 +3,9 @@ import json
 
 
 class CookieDumpArguments(TaskArguments):
-    def __init__(self, command_line):
-        super().__init__(command_line)
-        self.args = {}
+    def __init__(self, command_line, **kwargs):
+        super().__init__(command_line, **kwargs)
+        self.args = []
 
     async def parse_arguments(self):
         pass
@@ -19,7 +19,7 @@ class CookieDumpCommand(CommandBase):
     version = 1
     author = "@xorrior"
     argument_class = CookieDumpArguments
-    attackmapping = []
+    attackmapping = ["T1539"]
 
     async def create_tasking(self, task: MythicTask) -> MythicTask:
         return task

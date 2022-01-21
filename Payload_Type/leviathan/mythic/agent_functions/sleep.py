@@ -3,15 +3,15 @@ import json
 
 
 class SleepArguments(TaskArguments):
-    def __init__(self, command_line):
-        super().__init__(command_line)
-        self.args = {
-            "sleep": CommandParameter(
+    def __init__(self, command_line, **kwargs):
+        super().__init__(command_line, **kwargs)
+        self.args = [
+            CommandParameter(
                 name="sleep",
                 type=ParameterType.Number,
                 description="Adjust the callback interval in seconds",
             ),
-        }
+        ]
 
     async def parse_arguments(self):
         self.load_args_from_json_string(self.command_line)
