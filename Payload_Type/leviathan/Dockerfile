@@ -1,1 +1,1 @@
-FROM itsafeaturemythic/leviathan_payload:0.0.10
+FROM itsafeaturemythic/leviathan_payload:0.1.0
