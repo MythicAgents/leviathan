@@ -3,17 +3,16 @@ import json
 
 
 class InjectArguments(TaskArguments):
-    def __init__(self, command_line):
-        super().__init__(command_line)
-        self.args = {
-            "tabid": CommandParameter(name="tabid", type=ParameterType.Number),
-            "javascript": CommandParameter(
+    def __init__(self, command_line, **kwargs):
+        super().__init__(command_line, **kwargs)
+        self.args = [
+            CommandParameter(name="tabid", type=ParameterType.Number),
+            CommandParameter(
                 name="javascript",
                 type=ParameterType.String,
                 description="Base64 encoded javascript",
-                required=False,
             ),
-        }
+        ]
 
     async def parse_arguments(self):
         self.load_args_from_json_string(self.command_line)
@@ -27,7 +26,7 @@ class InjectCommand(CommandBase):
     version = 1
     author = "@xorrior"
     argument_class = InjectArguments
-    attackmapping = []
+    attackmapping = ["T1059.007"]
 
     async def create_tasking(self, task: MythicTask) -> MythicTask:
         return task

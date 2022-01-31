@@ -19,33 +19,33 @@ class Leviathan(PayloadType):
     wrapped_payloads = []
     note = "This payload uses javascript, html, and CSS for execution in the context of a browser via a Chrome Browser extension"
     supports_dynamic_loading = False
-    build_parameters = {
-        "name": BuildParameter(
+    build_parameters = [
+        BuildParameter(
             name="name",
             parameter_type=BuildParameterType.String,
             description="Name of your extension",
             default_value="example",
             required=False,
         ),
-        "update_url": BuildParameter(
+        BuildParameter(
             name="update_url",
             parameter_type=BuildParameterType.String,
             description="The url that hosts the update manifest file (xml)",
             default_value="http://www.example.com/update.xml",
         ),
-        "url": BuildParameter(
+        BuildParameter(
             name="url",
             parameter_type=BuildParameterType.String,
             description="The home page url for your extension. This will be used as the default location for when a user clicks on your extension icon in the toolbar",
             default_value="http://www.example.com",
         ),
-        "version": BuildParameter(
+        BuildParameter(
             name="version",
             parameter_type=BuildParameterType.String,
             description="The version for your extension",
             default_value="1.0",
         ),
-    }
+    ]
     c2_profiles = ["leviathan-websocket"]
 
     async def build(self) -> BuildResponse:
