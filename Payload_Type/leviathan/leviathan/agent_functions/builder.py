@@ -15,6 +15,7 @@ class Leviathan(PayloadType):
     author = "@xorrior"
     supported_os = [SupportedOS.Chrome]
     wrapper = False
+    semver = "0.1.0"
     mythic_encrypts = True
     wrapped_payloads = []
     note = "This payload uses javascript, html, and CSS for execution in the context of a browser via a Chrome Browser extension"
@@ -49,7 +50,18 @@ class Leviathan(PayloadType):
             default_value="1.0",
         ),
     ]
-    c2_profiles = ["leviathan-websocket"]
+    c2_profiles = ["websocket"]
+    c2_parameter_deviations = {
+        "websocket": {
+            "AESPSK": C2ParameterDeviation(supported=False),
+            "USER_AGENT": C2ParameterDeviation(supported=False),
+            "callback_jitter": C2ParameterDeviation(supported=False),
+            "domain_front": C2ParameterDeviation(supported=False),
+            "encrypted_exchange_check": C2ParameterDeviation(supported=False),
+            "killdate": C2ParameterDeviation(supported=False),
+            "tasking_type": C2ParameterDeviation(supported=False),
+        }
+    }
 
     async def build(self) -> BuildResponse:
         # this function gets called to create an instance of your payload

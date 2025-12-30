@@ -1,14 +1,18 @@
-FROM itsafeaturemythic/mythic_python_go:latest
+FROM python:3.11-alpine AS builder
 
+COPY [".docker/requirements.txt", "requirements.txt"]
+
+RUN apk add gcc build-base linux-headers git
 RUN git clone https://github.com/pawliczka/CRX3-Creator /CRX3-Creator
-RUN pip3 install cryptography==3.3.2
-RUN pip3 install pycparser==2.19
-RUN pip3 install six==1.13.0
+RUN python3 -m pip wheel --wheel-dir /wheels -r requirements.txt
+
+FROM python:3.11-alpine
+
+COPY --from=builder /wheels /wheels
+COPY --from=builder /CRX3-Creator /CRX3-Creator
+
+RUN pip install --no-cache /wheels/*
 
 WORKDIR /Mythic/
-
 COPY [".", "."]
-
-RUN make build
-
-CMD make run
+CMD ["python3", "main.py"]

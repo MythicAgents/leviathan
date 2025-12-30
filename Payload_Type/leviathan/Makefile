@@ -1,5 +1,5 @@
 BINARY_NAME?=main
-DEBUG_LEVEL?="warning"
+DEBUG_LEVEL?="debug"
 RABBITMQ_HOST?="127.0.0.1"
 RABBITMQ_PASSWORD?=""
 MYTHIC_SERVER_HOST?="127.0.0.1"
@@ -10,11 +10,7 @@ WEBHOOK_DEFAULT_FEEDBACK_CHANNEL?=
 WEBHOOK_DEFAULT_CALLBACK_CHANNEL?=
 WEBHOOK_DEFAULT_STARTUP_CHANNEL?=
 
-build:
-	cd leviathan_websocket/c2_code && make build
-
 run:
-	cd leviathan_websocket/c2_code && make run
 	python3 main.py
 
 run_custom:
