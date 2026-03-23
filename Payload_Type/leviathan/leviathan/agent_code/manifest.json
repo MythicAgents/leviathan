@@ -1,61 +1,53 @@
 {
   "name": "EXTENSION_NAME_REPLACE",
   "version": "VERSION_REPLACE",
-  "manifest_version": 2,
+  "manifest_version": 3,
   "description": "DESCRIPTION_REPLACE",
   "homepage_url": "http://www.example.com/debugextension",
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
-  "converted_from_user_script": true,
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
   "background": {
-    "scripts": [
-      "main.js"
-    ],
-    "persistent": true
+    "service_worker": "main.js"
   },
   "icons": {
     "128": "icons/blank.png"
   },
-  "update_url" : "http://www.example.com/update.xml",
+  "update_url": "http://www.example.com/update.xml",
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "permissions": [
+    "alarms",
     "bookmarks",
-    "webNavigation",
+    "browsingData",
     "clipboardRead",
     "clipboardWrite",
     "contentSettings",
     "contextMenus",
     "cookies",
-    "history",
-    "idle",
-    "management",
-    "notifications",
-    "tabs",
-    "identity",
-    "identity.email",
-    "alarms",
-    "background",
-    "browsingData",
-    "contentSettings",
-    "cookies",
     "debugger",
     "declarativeContent",
     "desktopCapture",
     "downloads",
+    "downloads.open",
     "gcm",
+    "geolocation",
     "history",
     "idle",
+    "identity",
+    "identity.email",
+    "management",
+    "nativeMessaging",
+    "notifications",
     "power",
     "privacy",
     "proxy",
+    "scripting",
     "system.cpu",
     "tabCapture",
     "tabs",
     "unlimitedStorage",
-    "webRequest",
-    "nativeMessaging",
-    "geolocation",
-    "webRequestBlocking",
-    "downloads",
-    "downloads.open",
-    "<all_urls>"
+    "webNavigation"
   ]
 }
