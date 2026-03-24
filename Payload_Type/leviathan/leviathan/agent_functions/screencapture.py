@@ -19,6 +19,7 @@ class ScreencaptureCommand(CommandBase):
     version = 1
     author = "@xorrior"
     argument_class = ScreencaptureArguments
+    browser_script = BrowserScript(script_name="screenshot", author="@djhohnstein", for_new_ui=True)
     attackmapping = ["T1113"]
 
     async def create_tasking(self, task: MythicTask) -> MythicTask:
