@@ -171,7 +171,7 @@ connection.onmessage = function (e) {
                             response = {
                                 'task_id':response.task_id,
                                 'user_output': '{"agent_file_id":"' + response.file_id + '"}',
-                                'complete':true
+                                'completed':true
                             }
                             
                             outer_response = {
